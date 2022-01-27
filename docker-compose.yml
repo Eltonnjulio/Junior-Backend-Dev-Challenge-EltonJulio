@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: blog
+    volumes:
+      - postgres_sdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+
+volumes:
+  postgres_sdata:
