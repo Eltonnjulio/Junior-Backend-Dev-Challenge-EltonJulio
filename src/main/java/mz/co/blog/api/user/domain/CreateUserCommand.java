@@ -18,9 +18,6 @@ public class CreateUserCommand {
     private String email;
 
     @NotNull
-    private UserRole role;
-
-    @NotNull
     @NotEmpty
     @Size(min = 2)
     private String username;

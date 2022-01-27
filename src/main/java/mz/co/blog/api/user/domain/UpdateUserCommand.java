@@ -18,6 +18,4 @@ public class UpdateUserCommand {
     @NotEmpty
     @Size(min = 2)
     private String name;
-    @NotNull
-    private UserRole role;
 }

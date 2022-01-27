@@ -28,10 +28,10 @@ public class CommentController {
     public ResponseEntity<CommentJson> updateComment(@PathVariable Long id, @RequestBody @Valid CommentCommand command) {
         return  ResponseEntity.ok(service.update(id,command));
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{postId}")
     @ApiOperation("Get Post Comments")
-    public ResponseEntity<Page<CommentJson>> getPostComments(@PathVariable Long id, Pageable pageable) {
-        return  ResponseEntity.ok(service.getPostComments(id,pageable));
+    public ResponseEntity<Page<CommentJson>> getPostComments(@PathVariable Long postId, Pageable pageable) {
+        return  ResponseEntity.ok(service.getPostComments(postId,pageable));
     }
     @DeleteMapping("/{id}")
     @ApiOperation("Delete Comment")

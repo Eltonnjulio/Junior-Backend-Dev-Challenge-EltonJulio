@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
         User user = UserMapper.INSTANCE.mapToModel(command);
         user.setUserStatus(UserStatus.ACTIVE);
+        user.setRole(UserRole.USER);
         user.setPassword(new BCryptPasswordEncoder().encode(command.getPassword()));
         return userRepository.save(user);
     }
