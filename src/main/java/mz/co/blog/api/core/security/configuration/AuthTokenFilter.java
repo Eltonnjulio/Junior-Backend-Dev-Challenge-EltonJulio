@@ -28,7 +28,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         if (tokenService.isValid(token)) {
             try {
                 User principal = userRepository.findByUsername(tokenService.getUsername(token)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal, token, principal.getAuthorities());
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             } catch (AuthenticationException fail) {
                 SecurityContextHolder.clearContext();

@@ -11,11 +11,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -25,11 +23,12 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
     private final AuthTokenService tokenService;
+    private final AuthService authService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(authService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -37,9 +36,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .cors()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(new AuthTokenEntryPoint())
-                .and()
-                .addFilterBefore(new AuthTokenFilter(tokenService, userRepository), BasicAuthenticationFilter.class)
+                .addFilterBefore(new AuthTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -52,25 +49,11 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
                 .antMatchers("/api/v1/**").authenticated()
                 .anyRequest().permitAll();
-        http.headers().frameOptions().disable();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByUsernameOrEmail(username, username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username ou senha incorrecta"));
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
     }
-
-
 }
