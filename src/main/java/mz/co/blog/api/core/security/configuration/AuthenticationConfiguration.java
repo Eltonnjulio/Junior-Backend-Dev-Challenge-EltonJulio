@@ -2,7 +2,7 @@ package mz.co.blog.api.core.security.configuration;
 
 import lombok.RequiredArgsConstructor;
 import mz.co.blog.api.user.persistence.UserRepository;
-import mz.co.blog.api.core.security.service.AuthTokenService;
+import mz.co.blog.api.core.security.utils.AuthTokenService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -39,7 +39,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new AuthTokenEntryPoint())
                 .and()
-                .addFilterBefore(new AuthTokenFilter(tokenService, new AuthTokenEntryPoint()), BasicAuthenticationFilter.class)
+                .addFilterBefore(new AuthTokenFilter(tokenService, userRepository), BasicAuthenticationFilter.class)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

@@ -14,24 +14,6 @@ CREATE TABLE users (
     UNIQUE (username, email)
 );
 
-CREATE TABLE password_resets (
-    id SERIAL PRIMARY KEY,
-    user_email VARCHAR(256) NOT NULL,
-    token VARCHAR(256) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP NOT NULL
-);
-
-CREATE TABLE auth_tokens (
-    id SERIAL PRIMARY KEY,
-    token VARCHAR(256) DEFAULT NULL,
-    valid_until TIMESTAMP DEFAULT NULL,
-    refresh_until TIMESTAMP DEFAULT NULL,
-    is_blacklisted BOOLEAN NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    user_id BIGINT NOT NULL
-);
-
 CREATE TABLE albums (
     id SERIAL PRIMARY KEY,
     title VARCHAR(256) NOT NULL,
