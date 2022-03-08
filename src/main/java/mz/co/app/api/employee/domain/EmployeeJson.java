@@ -11,8 +11,8 @@ public class EmployeeJson {
     private String name;
     private String surname;
     private LocalDate dateOfBirth;
-    private String maritalStatus;
-    private String identificationDoc;
+    private MaritalStatus maritalStatus;
+    private IdentificationDoc identificationDoc;
     private String identificationDocNum;
     private String nuit;
     private String address;

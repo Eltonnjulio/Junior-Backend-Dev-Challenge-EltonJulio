@@ -26,8 +26,10 @@ public class Employee {
     private String name;
     private String surname;
     private LocalDate dateOfBirth;
-    private String maritalStatus;
-    private String identificationDoc;
+    @Enumerated(EnumType.STRING)
+    private MaritalStatus maritalStatus;
+    @Enumerated(EnumType.STRING)
+    private IdentificationDoc identificationDoc;
     private String identificationDocNum;
     private String nuit;
     private String address;
