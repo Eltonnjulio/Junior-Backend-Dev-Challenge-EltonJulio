@@ -4,7 +4,7 @@ Desenvolvida usando spring-boot, PostgreSQL, Docker para a base de dados.
 
 
 - ## Para rodar o projecto
-- ### Requesitos:
+- ### Requisitos:
 - #### Ter pelo menos a versão 11 do JDK instalado
 - #### Ter o maven instalado
 - #### Ter o docker e docker-compose instalados
