@@ -1,4 +1,4 @@
-xspring:
+spring:
   flyway:
     clean-on-validation-error: true
     locations: classpath:/db/migration, classpath:/db/seeders
