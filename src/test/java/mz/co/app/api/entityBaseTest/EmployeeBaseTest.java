@@ -2,14 +2,13 @@ package mz.co.app.api.entityBaseTest;
 
 import com.github.javafaker.Faker;
 import lombok.Data;
-import mz.co.app.api.employee.domain.Employee;
-import mz.co.app.api.employee.domain.EmployeeCommand;
-import mz.co.app.api.employee.domain.EmployeeJson;
+import mz.co.app.api.employee.domain.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -31,8 +30,8 @@ public abstract class EmployeeBaseTest {
         employee.setContacts(contacts);
         employee.setNuit(faker.number().digits(9));
         employee.setDateOfBirth(LocalDate.now());
-        employee.setMaritalStatus("Solteiro");
-        employee.setIdentificationDoc("BI");
+        employee.setMaritalStatus(MaritalStatus.SINGLE);
+        employee.setIdentificationDoc(IdentificationDoc.BI);
         employee.setIdentificationDocNum("110100997030F");
         employee.setCreatedAt(LocalDateTime.now());
         return employee;
@@ -45,34 +44,22 @@ public abstract class EmployeeBaseTest {
         contacts.add(faker.phoneNumber().cellPhone());
         employeeCommand.setContacts(contacts);
         employeeCommand.setAddress(faker.address().fullAddress());
-        employeeCommand.setIdentificationDoc("BI");
+        employeeCommand.setIdentificationDoc(IdentificationDoc.BI);
         employeeCommand.setIdentificationDocNum("110100997030F");
         employeeCommand.setName(faker.name().name());
         employeeCommand.setSurname(faker.name().lastName());
         employeeCommand.setNuit(faker.number().digits(9));
-        employeeCommand.setMaritalStatus("Solteiro");
+        employeeCommand.setMaritalStatus(MaritalStatus.SINGLE);
         employeeCommand.setDateOfBirth(LocalDate.now());
        return employeeCommand;
     }
     protected List<Employee> employeeList(){
-        List<Employee> employees = new ArrayList();
-        employees.add(employee());
-        employees.add(employee());
-        employees.add(employee());
-        employees.add(employee());
-        employees.add(employee());
-        employees.add(employee());
-        return employees;
+
+        return Arrays.asList(employee(),employee(),employee(),employee());
     }
     protected List<EmployeeJson> employeeJsonList(){
-        List<EmployeeJson> employees = new ArrayList();
-        employees.add(employeeJson());
-        employees.add(employeeJson());
-        employees.add(employeeJson());
-        employees.add(employeeJson());
-        employees.add(employeeJson());
-        employees.add(employeeJson());
-        return employees;
+
+        return Arrays.asList(employeeJson(),employeeJson(),employeeJson(),employeeJson());
     }
     protected EmployeeJson employeeJson(){
         EmployeeJson employeeJson = new EmployeeJson();
@@ -82,12 +69,12 @@ public abstract class EmployeeBaseTest {
         contacts.add(faker.phoneNumber().cellPhone());
         employeeJson.setContacts(contacts);
         employeeJson.setAddress(faker.address().fullAddress());
-        employeeJson.setIdentificationDoc("BI");
+        employeeJson.setIdentificationDoc(IdentificationDoc.BI);
         employeeJson.setIdentificationDocNum("110100997030F");
         employeeJson.setName(faker.name().name());
         employeeJson.setSurname(faker.name().lastName());
         employeeJson.setNuit(faker.number().digits(9));
-        employeeJson.setMaritalStatus("Solteiro");
+        employeeJson.setMaritalStatus(MaritalStatus.SINGLE);
         employeeJson.setDateOfBirth(LocalDate.now());
         employeeJson.setCreatedAt(LocalDateTime.now());
         employeeJson.setUpdatedAt(LocalDateTime.now());
