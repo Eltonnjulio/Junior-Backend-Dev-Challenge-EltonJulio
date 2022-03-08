@@ -11,5 +11,5 @@ RUN mvn clean install -DskipTests
 # FROM openjdk:13-jre-alpine
 FROM openjdk:16-alpine3.13
 EXPOSE 8080
-COPY --from=maven target/blog-api-0.0.1-SNAPSHOT.jar ./
-CMD ["java", "-jar","./blog-api-0.0.1-SNAPSHOT.jar"]
+COPY --from=maven target/app-api-0.0.1-SNAPSHOT.jar ./
+CMD ["java", "-jar","./app-api-0.0.1-SNAPSHOT.jar"]

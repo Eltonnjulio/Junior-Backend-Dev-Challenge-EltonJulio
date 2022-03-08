@@ -8,11 +8,11 @@
 		<version>2.5.4</version>
 		<relativePath/>
 	</parent>
-	<groupId>mz.co.blog</groupId>
-	<artifactId>blog-api</artifactId>
+	<groupId>mz.co.app</groupId>
+	<artifactId>app-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api</name>
-	<description>Blog API</description>
+	<description>Employees API</description>
 	<properties>
 		<java.version>11</java.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -130,6 +130,10 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
     </dependencies>
 
