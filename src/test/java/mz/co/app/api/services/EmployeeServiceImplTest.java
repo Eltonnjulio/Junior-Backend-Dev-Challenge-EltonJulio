@@ -136,7 +136,6 @@ class EmployeeServiceImplTest extends EmployeeBaseTest {
     @Test
     void shouldNotDelete(){
         Long id = getFaker().number().randomNumber();
-        Employee employee = employee();
         Assertions.assertThrows(ResponseStatusException.class, ()->serviceIpl.delete(id));
         Mockito.verify(repository).findById(id);
         Mockito.verifyNoMoreInteractions(repository);
